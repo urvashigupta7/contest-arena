@@ -38,5 +38,3 @@ Navbar.defaultProps = {
     title: 'Contest Arena'
 }
 export default Navbar;
-// Client ID e5e6c5bae70021cf68095a49e9708f09
-// Client Secret 1976f2387da900347fe11d28f8f40a2a

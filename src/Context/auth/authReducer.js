@@ -30,7 +30,7 @@ export default (state, action) => {
         case LOGOUT:
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
-            localStorage.removeItem('requestLogin')
+            localStorage.removeItem('requestLogin');
             return {
                 ...state,
                 access_token: '',
