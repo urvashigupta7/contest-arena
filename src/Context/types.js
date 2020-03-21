@@ -1,2 +1,5 @@
 export const GET_ACCESS_TOKEN = 'GET_CONTACTS';
 export const GET_REFRESH_TOKEN = 'ADD_CONTACT';
+export const LOGOUT='LOGOUT';
+export const LOAD_HOMEPAGE='LOAD_HOMEPAGE'
+export const SET_REQUEST_LOGIN='SET_REQUEST_LOGIN'; 

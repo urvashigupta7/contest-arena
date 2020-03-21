@@ -417,3 +417,8 @@ table th {
     justify-content: center;
   }
 }
+.myContainer{
+  width: 30%;
+  margin: 10% auto;
+  text-align: center;
+}

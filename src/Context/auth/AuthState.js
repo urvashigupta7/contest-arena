@@ -5,18 +5,32 @@ import axios from 'axios';
 import {
     GET_ACCESS_TOKEN,
     GET_REFRESH_TOKEN,
+    LOGOUT,
+    LOAD_HOMEPAGE,
+    SET_REQUEST_LOGIN
 } from '../types';
-
+let CodechefClientId='';
+let CodechefClientSecret='';
+let redirect_uri='';
+if(process.env.NODE_ENV!=='production'){
+	CodechefClientId=process.env.REACT_APP_CLIENT_ID;
+    CodechefClientSecret=process.env.REACT_APP_CLIENT_SECRET;
+    redirect_uri=process.env.REACT_APP_REDIRECT_URI;
+}
+else{
+	CodechefClientId=process.env.CLIENT_ID;
+    CodechefClientSecret=process.env.CLIENT_SECRET;
+    redirect_uri=process.env.REDIRECT_URI
+}
 const AuthState = (props) => {
     const initialState = {
-        authToken:'',
-        refreshToken: '',
-        scope: '',
-        tokenType: '',
+        accessToken:localStorage.getItem('accessToken'),
+        refreshToken: localStorage.getItem('refreshToken'),
         isAuthenticated: null,
         error: null
     };
     const [state, dispatch] = useReducer(AuthReducer, initialState);
+    
     const getAccessToken=async()=>{
         const config={
             headers:{
@@ -29,23 +43,40 @@ const AuthState = (props) => {
           const data={
             "grant_type": "authorization_code",
             "code": `${code}`,
-            "client_id":"e5e6c5bae70021cf68095a49e9708f09",
-            "client_secret":"1976f2387da900347fe11d28f8f40a2a",
-            "redirect_uri":"http://localhost:3000/"
+            "client_id":`${CodechefClientId}`,
+            "client_secret":`${CodechefClientSecret}`,
+            "redirect_uri":`${redirect_uri}`
           }
+
+          try{
           const res= await axios.post('https://api.codechef.com/oauth/token',data,config);
+          loadHomePage();
           dispatch({type:GET_ACCESS_TOKEN,payload:res.data.result.data});
+          }catch(err){
+            console.log(err)
+          }
+          
+    }
+    const logout=()=>{
+        dispatch({type:LOGOUT});
+    }
+    const loadHomePage=()=>{
+        dispatch({type:LOAD_HOMEPAGE})
+    }
+    const setRequestLogin=()=>{
+        dispatch({type:SET_REQUEST_LOGIN})
     }
     return (
         <AuthContext.Provider
             value={{
-                authToken: state.authToken,
+                accessToken: state.accessToken,
                 refreshToken: state.refreshToken,
-                scope: state.scope,
-                tokenType: state.tokenType,
                 isAuthenticated: state.isAuthenticated,
                 error: state.error,
-                getAccessToken
+                getAccessToken,
+                loadHomePage,
+                logout,
+                setRequestLogin
             }}
         >
             {props.children}
