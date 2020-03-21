@@ -1,0 +1,2 @@
+export const GET_ACCESS_TOKEN = 'GET_CONTACTS';
+export const GET_REFRESH_TOKEN = 'ADD_CONTACT';
