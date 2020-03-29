@@ -8,7 +8,7 @@ const Navbar = (props) => {
     }
     const authLinks = (
         <Fragment>
-            <li>Hello user</li>
+            <li>Hello, User</li>
             <li>
                 <a onClick={logout} href="/login"><i className='fas fa-sign-out-alt'></i><span className='hide-sm'>Logout</span></a>
             </li>
@@ -26,9 +26,9 @@ const Navbar = (props) => {
     )
     return (
         <nav className='navbar bg-primary'>
-            <h1>{props.title}</h1>
+            <Link to='/home'><h1 style={{color:'white'}}>{props.title}</h1></Link>
             <ul>
-                {authContext.isAuthenticated ? authLinks : guestLinks}
+                {localStorage.getItem('accessToken') ? authLinks : guestLinks}
             </ul>
         </nav>
 

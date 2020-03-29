@@ -1,7 +1,6 @@
 import {
     GET_ACCESS_TOKEN,
     GET_REFRESH_TOKEN,
-    LOAD_HOMEPAGE,
     LOGOUT,
     SET_REQUEST_LOGIN
 } from '../types';
@@ -19,13 +18,15 @@ export default (state, action) => {
             return {
                 ...state,
                 accessToken: action.payload.access_token,
-                refreshToken: action.payload.refresh_token,
-                isAuthenticated: true
+                refreshToken: action.payload.refresh_token
             }
-        case LOAD_HOMEPAGE:
+        case GET_REFRESH_TOKEN:
+            localStorage.setItem('accessToken', action.payload.access_token)
+            localStorage.setItem('refreshToken', action.payload.refresh_token)
             return {
                 ...state,
-                isAuthenticated: true
+                accessToken: action.payload.access_token,
+                refreshToken: action.payload.refresh_token
             }
         case LOGOUT:
             localStorage.removeItem('accessToken');

@@ -6,22 +6,21 @@ const Load = (props) => {
     useEffect(() => {
 
         const getToken = async () => {
-            if(!localStorage.requestLogin){
+            if (!localStorage.requestLogin) {
                 props.history.push('/login');
             }
             else if (!localStorage.accessToken && localStorage.requestLogin) {
                 await authContext.getAccessToken();
-                console.log("hello");
-            }else{
-            props.history.push('/home');
-            console.log("bye")
+            } else {
+                props.history.push('/home');
             }
         }
         getToken();
-    },[authContext.accessToken])
+        //eslint-disable-next-line
+    }, [authContext.accessToken])
     return (
-        <div className="myContainer">
-              <Spinner/>
+        <div className="Search">
+            <Spinner />
         </div>
     )
 

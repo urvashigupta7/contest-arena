@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import AuthContext from '../../Context/auth/authContext';
+import codechefIcon from './codecheficon2.png';
 const Login = (props) => {
     const authContext = useContext(AuthContext)
     useEffect(() => {
@@ -13,10 +14,9 @@ const Login = (props) => {
     }
     return (
         <div className="myContainer">
-        <div style={{ align: "center" }}>
+            <img style={{width:"200px",height:"200px"}} src={codechefIcon} alt="CodechefIcon"/>
             <h1>Login</h1>
-            <button className='btn btn-light btn-block' onClick={onClick}>Login</button>
-        </div>
+            <button className='btn btn-block' onClick={onClick}><b>Login</b></button>
         </div>
     )
 }

@@ -2,11 +2,12 @@ import React, { useReducer } from 'react';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
 import axios from 'axios';
+import setAuthToken from '../../utils/setAuthToken';
+
 import {
     GET_ACCESS_TOKEN,
     GET_REFRESH_TOKEN,
     LOGOUT,
-    LOAD_HOMEPAGE,
     SET_REQUEST_LOGIN
 } from '../types';
 let CodechefClientId='';
@@ -26,7 +27,6 @@ const AuthState = (props) => {
     const initialState = {
         accessToken:localStorage.getItem('accessToken'),
         refreshToken: localStorage.getItem('refreshToken'),
-        isAuthenticated: null,
         error: null
     };
     const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -50,18 +50,39 @@ const AuthState = (props) => {
 
           try{
           const res= await axios.post('https://api.codechef.com/oauth/token',data,config);
-          loadHomePage();
+          setInterval(()=>{
+           getRefreshToken();
+          },3600*1000-5)
           dispatch({type:GET_ACCESS_TOKEN,payload:res.data.result.data});
           }catch(err){
             console.log(err)
           }
           
     }
+    const getRefreshToken=async()=>{
+        const config={
+            headers:{
+              'Content-Type':'application/json'
+            }
+          }
+        const data={
+            "grant_type": "refresh_token",
+            "refresh_token":localStorage.getItem('refreshToken'),
+            "client_id":`${CodechefClientId}`,
+            "client_secret":`${CodechefClientSecret}`
+          } 
+          try{
+            const res= await axios.post('https://api.codechef.com/oauth/token',data,config);
+            dispatch({type:GET_REFRESH_TOKEN,payload:res.data.result.data});
+            }catch(err){
+              console.log(err)
+            }    
+    }
     const logout=()=>{
         dispatch({type:LOGOUT});
     }
-    const loadHomePage=()=>{
-        dispatch({type:LOAD_HOMEPAGE})
+    const loadPage=()=>{
+        setAuthToken(localStorage.getItem('accessToken'));
     }
     const setRequestLogin=()=>{
         dispatch({type:SET_REQUEST_LOGIN})
@@ -71,10 +92,9 @@ const AuthState = (props) => {
             value={{
                 accessToken: state.accessToken,
                 refreshToken: state.refreshToken,
-                isAuthenticated: state.isAuthenticated,
                 error: state.error,
                 getAccessToken,
-                loadHomePage,
+                loadPage,
                 logout,
                 setRequestLogin
             }}
