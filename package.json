@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "@uiw/react-monacoeditor": "^2.0.2",
     "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
     "html-react-parser": "^0.10.3",
     "netlify-cli": "^2.40.0",
     "react": "^16.13.1",
@@ -43,8 +44,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "dotenv": "^8.2.0"
   }
 }
