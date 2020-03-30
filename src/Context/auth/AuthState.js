@@ -20,11 +20,9 @@ if(process.env.NODE_ENV!=='production'){
     redirect_uri=process.env.REACT_APP_REDIRECT_URI;
 }
 else{
-  console.log(process.env.CLIENT_ID);
-  console.log(process.env);
-	CodechefClientId=process.env.CLIENT_ID;
-    CodechefClientSecret=process.env.CLIENT_SECRET;
-    redirect_uri=process.env.REDIRECT_URI
+	CodechefClientId='e5e6c5bae70021cf68095a49e9708f09';
+    CodechefClientSecret='1976f2387da900347fe11d28f8f40a2a';
+    redirect_uri='https://contestarena.netlify.com/'
 }
 const AuthState = (props) => {
     const initialState = {
