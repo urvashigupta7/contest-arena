@@ -1,4 +1,4 @@
-import React, { useState,useContext} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import MonacoEditor from '@uiw/react-monacoeditor';
 import CodechefContext from '../../Context/codechef/codechefContext';
 import AlertContext from '../../Context/alert/alertContext';
@@ -8,53 +8,48 @@ const Ide = (props) => {
     const codechefContext = useContext(CodechefContext);
     const alertContext = useContext(AlertContext);
     const [code, setCode] = useState('// Type your code here');
-    const [input,setInput]=useState({
-        SelLanguage:'Select any language',
-        testInput:''
+    const [status, setStatus] = useState(null);
+    const [output, showOutput] = useState(null);
+    const [input, setInput] = useState({
+        SelLanguage: 'Select any language',
+        testInput: ''
     })
     const onChangeEditor = (newValue, e) => {
         setCode(newValue)
     }
-    const onChange=(e)=>{
-        setInput({...input,[e.target.name]:e.target.value});
+    const onChange = (e) => {
+        setInput({ ...input, [e.target.name]: e.target.value });
 
     }
-
-    const onClick=async(e)=>{
+    const onClick = async (e) => {
         e.preventDefault();
-        if(input.SelLanguage==='Select any language'){
-            alertContext.setAlert('Please select language','danger');
+        if (input.SelLanguage === 'Select any language') {
+            alertContext.setAlert('Please select language', 'danger');
         }
-        else{
-            alertContext.setAlert('Running your code','light');
-        await codechefContext.runCode(input.SelLanguage,code,input.testInput);
-        if(codechefContext.codeStatus===200){
-            alertContext.setAlert('Code executed without any error','success');  
-          }
-          else{
-            alertContext.setAlert('Check for error in your code','danger'); 
-      } 
+        else {
+            showOutput(null);
+            setStatus('Submitting your code');
+            await codechefContext.runCode(input.SelLanguage, code, input.testInput);
+            setStatus(null);
+            showOutput(true);
         }
-        
     }
-    const onSubmit=async(e)=>{
-      e.preventDefault();
-      if(input.SelLanguage==='Select any language'){
-          alertContext.setAlert('Please select language','danger');
-      }
-      else{
-        alertContext.setAlert('Running your code','light');
-        await codechefContext.runCode(input.SelLanguage,code,input.testInput);
-        if(codechefContext.codeStatus===200){
-            alertContext.setAlert('Code executed without any error','success');  
-          }
-          else{
-            alertContext.setAlert('Check for error in your code','danger'); 
-      } 
-        
-      }
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        if (input.SelLanguage === 'Select any language') {
+            alertContext.setAlert('Please select language', 'danger');
+        }
+        else {
+            showOutput(null);
+            setStatus('Running your code');
+            await codechefContext.runCode(input.SelLanguage, code, input.testInput);
+            setStatus(null);
+            showOutput(true);
+
+        }
     }
     return (
+
         <div>
             <div>
                 <select className="language" name="SelLanguage" onChange={onChange} value={input.SelLanguage}>
@@ -78,16 +73,20 @@ const Ide = (props) => {
                 />
             </div>
             <div>
-                <Alert/>
+                <Alert />
+                {status ? <div className={`alert alert-success`}>
+                    <i className='fas fa-info-circle' /> {status}  </div> : <div></div>}
+                {output ? codechefContext.codeStatus : <div></div>}
                 <form className="ide" onSubmit={onSubmit}>
-                    <h3 style={{marginTop:"2%"}}>Type your input below </h3>
-                <textarea name="testInput" onChange={onChange} style={{overflowX:"auto",width:"100%",height:"200px"}} rows="1000" cols="50"/>
-                 <button type='submit' className="btn btn-sm btn-dark">Run</button>
-                
-                 <button className="btn btn-sm btn-dark" onClick={onClick}>Submit</button>
+                    <h3 style={{ marginTop: "2%" }}>Type your input below </h3>
+                    <textarea name="testInput" onChange={onChange} style={{ overflowX: "auto", width: "100%", height: "200px" }} rows="1000" cols="50" />
+                    <button type='submit' className="btn btn-sm btn-dark">Run</button>
+
+                    <button className="btn btn-sm btn-dark" onClick={onClick}>Submit</button>
                 </form>
+
             </div>
-           
+
         </div>
     )
 

@@ -4,7 +4,9 @@ const ProblemItem=(props)=>{
  return(
     <Fragment>
         <tr >
-            <td><Link to={`/problem/${props.problem.contestCode}/${props.problem.problemCode}`}>{props.problem.problemCode}</Link></td>
+            <td><u>
+                <Link to={`/problem/${props.problem.contestCode}/${props.problem.problemCode}`}>{props.problem.problemCode}</Link>
+                </u></td>
             <td>{props.problem.successfulSubmissions}</td>
             <td>{props.problem.accuracy.toFixed(2)}</td>
         </tr>

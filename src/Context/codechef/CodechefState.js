@@ -102,6 +102,7 @@ const CodechefState = (props) => {
             const parsedData=JSON.parse(data);
             const link=parsedData.result.data.link;
             const status=await axios.get('https://api.codechef.com/ide/status?link='+link);
+            console.log(status);
             dispatch({type:SET_CODESTATUS,payload:status.status});
 
         }catch(err){

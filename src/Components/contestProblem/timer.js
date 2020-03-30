@@ -27,8 +27,17 @@ const Timer = () => {
                     }, time/2);
                 },time/2);
             }
-            else {
+            else if(resEnd<today) {
                 setTimerState('Contest ended')
+            }else{
+                    setTimerState('Contest Ends In');
+                    const time=resEnd.getTime()-today.getTime();
+                    setInitialTime(time);
+                    setTimeout(()=>{
+                      setTimerState('Contest Ended');
+                      setInitialTime(null);
+                    },time)
+                
             }
         }
         else{

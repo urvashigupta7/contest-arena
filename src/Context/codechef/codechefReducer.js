@@ -38,12 +38,12 @@ export default (state, action) => {
                 submissionList: action.payload,
                 loadingDetail: false
             }
-        case SET_CODESTATUS:{
-            return{
+        case SET_CODESTATUS: {
+            return {
                 ...state,
-                codeStatus:action.payload
+                codeStatus: action.payload
             }
-        }    
+        }
         case LOADING_PROBLEM:
             return {
                 ...state,
@@ -54,13 +54,13 @@ export default (state, action) => {
                 ...state,
                 loading: true
             }
-        case GET_RANKLIST:{
-            return{
+        case GET_RANKLIST: {
+            return {
                 ...state,
-                rankList:action.payload,
-                loading:false
+                rankList: action.payload,
+                loading: false
             }
-        }    
+        }
 
         default:
             return state;

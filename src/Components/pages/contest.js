@@ -75,7 +75,8 @@ const Contest = (props) => {
               </Link>
             </div>
             ): display ?
-            (<div className='card'><Link to={`/problem/${detail.code}`}><button className="btn btn-dark btn-block">Go To Contest Problems</button></Link></div>)
+            (<div><Link to={`/problem/${detail.code}`}>
+            <button className="btn btn-dark btn-block">Go To Contest Problems</button></Link></div>)
             :(<Fragment></Fragment>)
         }
         </div>

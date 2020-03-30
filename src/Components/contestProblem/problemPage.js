@@ -5,9 +5,9 @@ import Spinner from '../layout/spinner.js';
 import SubmissionTable from './SubmissionTable'
 import Ide from './ide.js'
 import parse from 'html-react-parser';
+import ProblemStatement from './ProblemStatement';
 
-
-const ProblemStatement = (props) => {
+const ProblemPage = (props) => {
     const codechefContext = useContext(CodechefContext);
     const authContext = useContext(AuthContext);
     const [displayProblem, setDisplayProblem] = useState(true);
@@ -51,7 +51,10 @@ const ProblemStatement = (props) => {
             </div>
         )
     }
+    
     else {
+        const problem=codechefContext.problem.body;
+        const rawStatement=String.raw `${problem}`
         return (
             <div>
                 <div className="contestHeading">
@@ -70,7 +73,7 @@ const ProblemStatement = (props) => {
                         <div className="heading">
                             <h2>{codechefContext.problem.problemName}</h2>
                         </div>
-                        {displayProblem ? parse(codechefContext.problem.body) : (<Fragment></Fragment>)}
+                        {displayProblem ?<ProblemStatement statement={rawStatement}/>  : (<Fragment></Fragment>)}
                         {displaySubmissions ? <SubmissionTable contestcode={props.match.params.contestcode} problemcode={props.match.params.problemcode}
                         language={codechefContext.problem.languagesSupported}/>: (<Fragment></Fragment>)}
                         {displaySubmit ? (<Ide language={codechefContext.problem.languagesSupported}/>) : (<Fragment></Fragment>)}
@@ -82,4 +85,4 @@ const ProblemStatement = (props) => {
     }
 
 }
-export default ProblemStatement;
+export default ProblemPage;
