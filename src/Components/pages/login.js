@@ -9,7 +9,7 @@ const Login = (props) => {
         }
     }, [props.history])
     const onClick = () => {
-        window.location.href = 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=e5e6c5bae70021cf68095a49e9708f09&state=xyz&redirect_uri=https://contestarena.netlify.com/';
+        window.location.href = 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=e5e6c5bae70021cf68095a49e9708f09&state=xyz&redirect_uri=https://stupefied-villani-995cf4.netlify.com/';
         authContext.setRequestLogin();
     }
     return (
