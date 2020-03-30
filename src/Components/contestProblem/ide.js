@@ -1,8 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import MonacoEditor from '@uiw/react-monacoeditor';
 import CodechefContext from '../../Context/codechef/codechefContext';
 import AlertContext from '../../Context/alert/alertContext';
 import Alert from '../layout/alert';
+import Spinner from '../layout/spinner.js';
+
 
 const Ide = (props) => {
     const codechefContext = useContext(CodechefContext);
@@ -76,7 +78,10 @@ const Ide = (props) => {
                 <Alert />
                 {status ? <div className={`alert alert-success`}>
                     <i className='fas fa-info-circle' /> {status}  </div> : <div></div>}
-                {output ? codechefContext.codeStatus : <div></div>}
+                {output ? <div><h2>Output</h2>{codechefContext.codeStatus?
+                <textarea readOnly style={{ overflowX: "auto", width: "100%", height: "200px",backgroundColor:"aliceBlue" }} rows="1000" cols="50" value={codechefContext.codeStatus}/>
+                 :<Spinner/>}
+                 </div>: <div></div>}
                 <form className="ide" onSubmit={onSubmit}>
                     <h3 style={{ marginTop: "2%" }}>Type your input below </h3>
                     <textarea name="testInput" onChange={onChange} style={{ overflowX: "auto", width: "100%", height: "200px" }} rows="1000" cols="50" />

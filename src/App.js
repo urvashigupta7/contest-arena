@@ -11,10 +11,9 @@ import AlertState from './Context/alert/AlertState';
 import Load from './Components/pages/load.js';
 import Ranking from './Components/pages/ranking.js';
 import Problem from './Components/pages/problem.js';
-import ProblemPage from './Components/contestProblem/problemPage';
+import ProblemPage from './Components/pages/problemPage';
 import PrivateRoute from './Components/Routing/privateRoute'
 require('dotenv').config()
-
 
 function App() {
   return (

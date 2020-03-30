@@ -1,93 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
 import { Markdown } from "react-showdown";
 import Styled from "styled-components";
-// const ProblemStatement=(props)=>{
-  
-//     window.MathJax = {
-//         loader: { load: ["input/asciimath"] },
-//         startup: {},
-//         tex: {
-//           inlineMath: [["$", "$"], ["\\(", "\\)"]],
-//           processEscapes: true,
-//         },
-//       };
-//     const[partState,setPartState]=useState([]);  
-//     const computeParts=()=>{
-//         const arr = props.statement.split("### ");
-//         let parts=[];
-//         parts.push({ body: arr[1], line: true });
 
-//         for (let i = 2; i < arr.length; i++) {
-//           const str = arr[i];
-//           for (let j = 0; j < str.length; j++) {
-//             const c = str[j];
-//             const isChar =
-//               (c >= "a" && c <= "z") || (c >= "A" && c <= "Z") || c === " ";
-//             if (!isChar) {
-//               parts.push({
-//                 head: str.substr(0, j),
-//                 body: str.substr(j, str.length - j),
-//                 line: !(i === arr.length - 1),
-//               });
-//               break;
-//             }
-//           }
-//         }
-//         for (let i = 0; i < parts.length; i++) {
-//           parts[i].key = i;
-//         }
-//         setPartState(parts);
-//     }
-//     useEffect(()=>{
-//       console.log("hello")
-//       computeParts();
-//      //eslint-disable-next-line
-//     },[])
-    
-//     return(
-//        <div>
-//           {partState.map(p => {
-//           return !p.head && !p.body ? (
-//             ""
-//           ) : (
-//             <div key={p.key}>
-//               {p.head ? <h3>{p.head}</h3> : ""}
-//               {
-//                 <div>
-//                   <Markdown markup={p.body} />
-//                 </div>
-//               }
-//               {p.line ? <hr /> : ""}
-//             </div>
-//           );
-//         })}
-//        </div>
-//     )
-
-// }
-// export default ProblemStatement;
 window.MathJax = {
   loader: { load: ["input/asciimath"] },
   startup: {},
   tex: {
-    inlineMath: [["$", "$"], [String.raw`\\(`, String.raw`\\)`]],
-    processEscapes: true,
-  },
+    inlineMath: [
+      ["$", "$"],
+      ["\\(", "\\)"]
+    ],
+    processEscapes: true
+  }
 };
 
 const Root = Styled.div`
-  width: 600px;
-  margin-left: 90px;
-  padding-left: 30px;
+  width:80%;
   padding-right: 30px;
   padding-top: 30px;
-  -webkit-box-shadow: 0px 0px 8px 2px rgba(163, 145, 163, 1);
-  -moz-box-shadow: 0px 0px 8px 2px rgba(163, 145, 163, 1);
-  box-shadow: 0px 0px 8px 2px rgba(163, 145, 163, 1);
-  border-radius: 2px;
+  font-size:20px;
 `;
 
-// pass problem statement as prop and store in state
 class ProblemStatement extends React.Component {
   constructor(props) {
     super(props);
@@ -110,7 +43,7 @@ class ProblemStatement extends React.Component {
           parts.push({
             head: str.substr(0, j),
             body: str.substr(j, str.length - j),
-            line: !(i === arr.length - 1),
+            line: !(i === arr.length - 1)
           });
           break;
         }
@@ -122,9 +55,21 @@ class ProblemStatement extends React.Component {
     return { parts };
   }
 
+  setMathJax() {
+    if (window.MathJax) {
+      window.MathJax.tex = {
+        inlineMath: [
+          ["$", "$"],
+          [String.raw`\\(`, String.raw`\\)`]
+        ],
+        processEscapes: true
+      };
+    }
+  }
+
+
   render() {
     const { parts } = this.state;
-
     return (
       <Root>
         {parts.map(p => {
@@ -135,7 +80,9 @@ class ProblemStatement extends React.Component {
               {p.head ? <h3>{p.head}</h3> : ""}
               {
                 <div>
-                  <Markdown markup={p.body} />
+                  <Markdown
+                    markup={p.body.replace("`", "")}
+                  />
                 </div>
               }
               {p.line ? <hr /> : ""}

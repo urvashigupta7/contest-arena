@@ -39,7 +39,7 @@ const Timer = () => {
                     },time)
                 
             }
-        }
+      }
         else{
             setInitialTime(null);
         }

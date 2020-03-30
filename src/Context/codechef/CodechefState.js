@@ -61,7 +61,7 @@ const CodechefState = (props) => {
         setLoadingDetail();
         try{
          const response = await axios.get('https://api.codechef.com/submissions/?problemCode='+problemCode+'&contestCode='+contestCode+
-         '&fields=date,username,problemCode,language,result,score,time,memory&username='+username+'&language=&'+language);
+         '&fields=date,username,problemCode,language,result,score,time,memory&username='+username+'&language='+language);
          const detail = response.data.result.data.content;
          dispatch({ type: GET_SUBMISSION, payload: detail })
         }catch(err){
@@ -101,9 +101,30 @@ const CodechefState = (props) => {
             const data=response.data.substring(0,index+1);
             const parsedData=JSON.parse(data);
             const link=parsedData.result.data.link;
-            const status=await axios.get('https://api.codechef.com/ide/status?link='+link);
-            console.log(status);
-            dispatch({type:SET_CODESTATUS,payload:status.status});
+            
+            let payload=null;
+            const getOutput=()=>{setTimeout(async()=>{
+              const status=await axios.get('https://api.codechef.com/ide/status?link='+link);
+
+              const d1=status?status.data:''
+              const result =d1?d1.result:''
+              const d2 = result?result.data:''
+              const output=d2?d2.output:''
+              const cmpInfo=d2?d2.cmpinfo:''
+              if(output||cmpInfo){
+                if(cmpInfo===''){
+                  payload=output
+              }else{
+                  payload=cmpInfo
+              }
+               dispatch({type:SET_CODESTATUS,payload:payload});
+              }else{
+                getOutput();
+              }
+            },10000)}
+            getOutput();
+           
+           
 
         }catch(err){
             console.log(err);
@@ -145,3 +166,4 @@ const CodechefState = (props) => {
     );
 }
 export default CodechefState;
+

@@ -14,7 +14,6 @@ let CodechefClientId='';
 let CodechefClientSecret='';
 let redirect_uri='';
 if(process.env.NODE_ENV!=='production'){
-  console.log(process.env.REACT_APP_CLIENT_ID)
 	CodechefClientId=process.env.REACT_APP_CLIENT_ID;
     CodechefClientSecret=process.env.REACT_APP_CLIENT_SECRET;
     redirect_uri=process.env.REACT_APP_REDIRECT_URI;
@@ -48,9 +47,7 @@ const AuthState = (props) => {
             "client_secret":`${CodechefClientSecret}`,
             "redirect_uri":`${redirect_uri}`
           }
-          console.log(CodechefClientId);
-          console.log(CodechefClientSecret)
-
+        
           try{
           const res= await axios.post('https://api.codechef.com/oauth/token',data,config);
           setInterval(()=>{

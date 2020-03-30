@@ -2,10 +2,9 @@ import React, { useEffect, useContext, useState, Fragment } from 'react';
 import CodechefContext from '../../Context/codechef/codechefContext';
 import AuthContext from '../../Context/auth/authContext';
 import Spinner from '../layout/spinner.js';
-import SubmissionTable from './SubmissionTable'
-import Ide from './ide.js'
-import parse from 'html-react-parser';
-import ProblemStatement from './ProblemStatement';
+import SubmissionTable from '../contestProblem/SubmissionTable'
+import Ide from '../contestProblem/ide.js'
+import ProblemStatement from '../contestProblem/ProblemStatement';
 
 const ProblemPage = (props) => {
     const codechefContext = useContext(CodechefContext);
