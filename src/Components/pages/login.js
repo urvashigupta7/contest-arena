@@ -1,15 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import AuthContext from '../../Context/auth/authContext';
 import codechefIcon from './codecheficon2.png';
-let redirect_uri='';
-
 const Login = (props) => {
-    if(process.env.NODE_ENV!=='production'){
-	    redirect_uri=process.env.REACT_APP_REDIRECT_URI;
-     }
-else{
-    redirect_uri=process.env.REDIRECT_URI
-}
     const authContext = useContext(AuthContext)
     useEffect(() => {
         if (localStorage.accessToken) {
