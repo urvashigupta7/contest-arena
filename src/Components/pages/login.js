@@ -17,7 +17,7 @@ else{
         }
     }, [props.history])
     const onClick = () => {
-        window.location.href = 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=e5e6c5bae70021cf68095a49e9708f09&state=xyz&redirect_uri='+redirect_uri;
+        window.location.href = 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=e5e6c5bae70021cf68095a49e9708f09&state=xyz&redirect_uri=https://contestarena.netlify.com/';
         authContext.setRequestLogin();
     }
     return (
