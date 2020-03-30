@@ -14,11 +14,13 @@ let CodechefClientId='';
 let CodechefClientSecret='';
 let redirect_uri='';
 if(process.env.NODE_ENV!=='production'){
+  
 	CodechefClientId=process.env.REACT_APP_CLIENT_ID;
     CodechefClientSecret=process.env.REACT_APP_CLIENT_SECRET;
     redirect_uri=process.env.REACT_APP_REDIRECT_URI;
 }
 else{
+  console.log(process.env.CLIENT_ID);
 	CodechefClientId=process.env.CLIENT_ID;
     CodechefClientSecret=process.env.CLIENT_SECRET;
     redirect_uri=process.env.REDIRECT_URI
