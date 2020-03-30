@@ -21,6 +21,7 @@ if(process.env.NODE_ENV!=='production'){
 }
 else{
   console.log(process.env.CLIENT_ID);
+  console.log(process.env);
 	CodechefClientId=process.env.CLIENT_ID;
     CodechefClientSecret=process.env.CLIENT_SECRET;
     redirect_uri=process.env.REDIRECT_URI
