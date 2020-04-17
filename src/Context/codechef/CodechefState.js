@@ -121,7 +121,7 @@ const CodechefState = (props) => {
               }else{
                 getOutput();
               }
-            },2000)}
+            },10000)}
             getOutput();
            
            
