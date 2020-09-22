@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, Fragment } from 'react';
 import CodechefContext from '../../Context/codechef/codechefContext';
 import Spinner from '../layout/spinner.js';
-import banner from './banner.jpg';
+import banner from '../../assets/banner.jpg'
 import { Link } from 'react-router-dom';
 
 const Contest = (props) => {

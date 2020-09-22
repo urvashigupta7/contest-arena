@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import AuthContext from '../../Context/auth/authContext';
 import Spinner from '../layout/spinner.js';
 import ProblemList from '../contestProblem/problemList';
-import banner from './banner.jpg';
+import banner from '../../assets/banner.jpg'
 import Timer from '../contestProblem/timer'
 const Problem = (props) => {
   const codechefContext = useContext(CodechefContext);

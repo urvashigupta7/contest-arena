@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import AuthContext from '../../Context/auth/authContext';
-import codechefIcon from './codecheficon2.png';
+import codechefIcon from '../../assets/codecheficon2.png';
 const Login = (props) => {
     const authContext = useContext(AuthContext)
     useEffect(() => {
