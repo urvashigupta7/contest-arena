@@ -1,6 +1,6 @@
 # CONTEST ARENA
 
-  Search and practice codechef contests.
+  Search codechef contests and pratice problems.
 
 ## Application Features
 * Login (using OAUTH 2.0)
@@ -9,6 +9,27 @@
 * For each contest problem  it displays the corresponding problem statement, with an ide to run code.
 
 ## Applications Snapshots
+
+### Login
+![alt text](https://github.com/urvashigupta7/contest-arena/blob/master/screenshots/Login.png)
+
+### Search
+![alt text](https://github.com/urvashigupta7/contest-arena/blob/master/screenshots/Search.png)
+
+### Ranklist
+![alt text](https://github.com/urvashigupta7/contest-arena/blob/master/screenshots/Ranklist.png)
+
+### Contest Problem
+![alt text](https://github.com/urvashigupta7/contest-arena/blob/master/screenshots/ContestProblem.png)
+
+### Problem Statement
+![alt text](https://github.com/urvashigupta7/contest-arena/blob/master/screenshots/ProblemStatement.png)
+
+### Submissions Details
+![alt text](https://github.com/urvashigupta7/contest-arena/blob/master/screenshots/Submissions.png)
+
+### Run Code
+![alt text](https://github.com/urvashigupta7/contest-arena/blob/master/screenshots/Submit.png)
 
 
 
