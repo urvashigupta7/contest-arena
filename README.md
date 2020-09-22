@@ -1,5 +1,18 @@
+# CONTEST ARENA
 
-## Steps to run the app
+  Search and practice codechef contests.
+
+## Application Features
+* Login (using OAUTH 2.0)
+* Search Contest using Contest code or Contest name.
+* For each Contest, it displays clickable list of all problems ,timer, contest ranks, submission details.
+* For each contest problem  it displays the corresponding problem statement, with an ide to run code.
+
+## Applications Snapshots
+
+
+
+## Steps to run app locally
 
 * Clone the repository.
 * Run npm install
